@@ -9,26 +9,27 @@ import java.math.BigInteger;
 @Getter
 @Setter
 @Entity
-@Table(name = "Post")
-public class PostEntity extends BaseEntity {
+@Table(name = "Posts")
+public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue
     private BigInteger id;
 
-    @Column(length = 100, nullable = false)
+    @Column(nullable = false)
     private String title;
 
-    @Column
+    @Column(nullable = false)
     private String nickname;
-    @Column
+    @Column(nullable = false)
     private String thumbnail;
 
-    @Column(length = 100, nullable = false)
+    @Column(nullable = false)
     private String content;
 
     @Builder
-    public PostEntity(String title, String nickname, String thumbnail, String content) {
+    public Post(BigInteger id, String title, String nickname, String thumbnail, String content) {
+       this.id = id;
         this.title = title;
         this.nickname = nickname;
         this.thumbnail = thumbnail;
@@ -36,4 +37,8 @@ public class PostEntity extends BaseEntity {
 
 
     }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

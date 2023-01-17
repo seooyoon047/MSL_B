@@ -1,5 +1,6 @@
-import com.example.msl_b.Domain.Entity.PostEntity;
+package com.example.msl_b.Domain.dto;
 
+import com.example.msl_b.Domain.Entity.Post;
 import lombok.*;
 
 import java.math.BigInteger;
@@ -19,8 +20,8 @@ public class PostDto {
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
-    public PostEntity toEntity(){
-        PostEntity postEntity = PostEntity.builder()
+    public Post toEntity(){
+        Post post = Post.builder()
 
                 .title(title)
                 .nickname(nickname)
@@ -28,7 +29,7 @@ public class PostDto {
                 .content(content)
 
                 .build();
-        return postEntity;
+        return post;
     }
 
     @Builder
