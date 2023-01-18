@@ -1,42 +1,19 @@
 package com.example.msl_b.Domain.dto;
 
-import com.example.msl_b.Domain.Entity.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import java.math.BigInteger;
-import java.time.LocalDateTime;
-
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
-    private BigInteger id;
-    private String nickname;
+    private String username;
     private String password;
-
     private String name;
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
-
-    public User toEntity(){
-        return User.builder()
-                .id(id)
-                .nickname(nickname)
-                .password(password)
-                .name(name)
-
-                .build();
-    }
-
-    @Builder
-    public UserDto(BigInteger id, String nickname, String password, String name, LocalDateTime createdDate, LocalDateTime modifiedDate) {
-        this.id = id;
-        this.nickname = password;
-        this.password = nickname;
-        this.name = name;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
-    }
 }

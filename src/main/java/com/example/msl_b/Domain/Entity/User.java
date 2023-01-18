@@ -1,44 +1,43 @@
 package com.example.msl_b.Domain.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
-@Setter
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Data
 @Table(name = "Users")
-public class User extends BaseEntity {
+public class User  extends BaseEntity{
     @Id
-    @GeneratedValue
-    private BigInteger id;
-    @Column(nullable = false)
-    private String nickname;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(nullable = false, unique = true)
+    private String username;
+
     @JsonIgnore
     @Column(nullable = false)
     private String password;
 
-
-
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
+    private String roles; // USER, ADMIN
 
-
-    @Builder
-    public User(BigInteger id, String nickname, String password, String name){
-        this.id= id;
-        this.nickname = nickname;
-        this.password = password;
-        this.name = name;
-
-
-
+    public List<String> getRoleList() {
+        if (this.roles.length() > 0) {
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
     }
-
-
 
 }

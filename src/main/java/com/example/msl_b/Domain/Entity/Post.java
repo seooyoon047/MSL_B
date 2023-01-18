@@ -5,38 +5,21 @@ import lombok.*;
 import javax.persistence.*;
 import java.math.BigInteger;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Posts")
 public class Post extends BaseEntity {
-
     @Id
-    @GeneratedValue
-    private BigInteger id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50)
     private String title;
 
     @Column(nullable = false)
-    private String nickname;
-    @Column(nullable = false)
-    private String thumbnail;
-
-    @Column(nullable = false)
     private String content;
-
-    @Builder
-    public Post(BigInteger id, String title, String nickname, String thumbnail, String content) {
-       this.id = id;
-        this.title = title;
-        this.nickname = nickname;
-        this.thumbnail = thumbnail;
-        this.content = content;
-
-
-    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

@@ -14,7 +14,6 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Response<?> illegalArgumentExceptionAdvice(IllegalArgumentException e) {
         return new Response("fail", e.getMessage().toString(), null);
-
-
     }
+
 }
